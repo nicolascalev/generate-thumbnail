@@ -7,14 +7,16 @@ const puppeteer = require('puppeteer');
 const stream = require('stream');
 const resizeImg = require('resize-img');
 
+app.set('view engine', 'ejs');
+
 // store cache here
 let cache = {}
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.render('index', { title: 'Hey', message: 'Hello there!' })
 })
 
-app.get('/generate', async (req, res) => {
+app.get('/thumbnail', async (req, res) => {
   // take only whats necesary from query
   const params = { header, title, description, photoUrl } = req.query;
   if (
