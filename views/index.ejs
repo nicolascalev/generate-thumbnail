@@ -17,7 +17,7 @@
 
   <div id="app" class="container">
     <h1 class="mt-5">Visualize thumbnail</h1>
-    <div class="row">
+    <div class="row py-5">
       <div class="col-12 col-md-6">
         <form @submit.prevent="setFullUrl()">
           <div class="mb-3">
@@ -41,7 +41,7 @@
         </form>
       </div>
       <div class="col-12 col-md-6">
-        <img v-if="fullUrl" :src="fullUrl" alt="Thumbnail" width="500">
+        <img v-if="fullUrl" :src="fullUrl" alt="Thumbnail" style="width: 100%; max-width: 500px;">
       </div>
     </div>
   </div>
@@ -69,7 +69,9 @@
       },
       methods: {
         setFullUrl() {
-          this.fullUrl = `/thumbnail?header=${this.header}&title=${this.title}&description=${this.description}&photoUrl=${this.photoUrl}`;
+          const paramsString = `header=${this.header}&title=${this.title}&description=${this.description}&photoUrl=${this.photoUrl}`;
+          const searchParams = new URLSearchParams(paramsString);
+          this.fullUrl = `/thumbnail?` + searchParams.toString();
         },
       }
     }).mount('#app')
