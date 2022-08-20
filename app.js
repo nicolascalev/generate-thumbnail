@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 5000
+const port = process.env.PORT || 5000;
 const getRenderedPage = require('./getRenderedPage')
 const { v4 } = require('uuid');
 const puppeteer = require('puppeteer');
